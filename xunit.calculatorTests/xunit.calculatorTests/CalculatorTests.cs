@@ -1,12 +1,14 @@
 ﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Xunit;
+using Assert = Xunit.Assert;
 
 namespace xunit.calculatorTests
 {
     public class CalculatorFixture
     {
         public Calculator Calc => new Calculator();
-
+        public PrivateObject CalcPrivate => new PrivateObject(new Calculator());
     }
 
 
@@ -17,6 +19,14 @@ namespace xunit.calculatorTests
         public CalculatorTests(CalculatorFixture calculatorFixture)
         {
             _calculatorFixture = calculatorFixture;
+        }
+
+        [Fact]
+        [Trait("CalCategory", "Add")]
+        public void privateMethod_test_success()
+        {
+            var result = _calculatorFixture.CalcPrivate.Invoke("AddThenSubtract", 3, 4) as int?;
+            Assert.True(result == 6);
         }
 
         [Fact]

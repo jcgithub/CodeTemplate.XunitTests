@@ -17,6 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+      <HintPath>ExternalDlls\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Data.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

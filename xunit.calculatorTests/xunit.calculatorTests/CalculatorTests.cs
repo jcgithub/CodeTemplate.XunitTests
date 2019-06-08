@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Xunit;
 using Assert = Xunit.Assert;
 
@@ -86,6 +87,24 @@ namespace xunit.calculatorTests
         {
             var check = _calculatorFixture.Calc.Subtract(x, y) == result;
             Assert.Equal(check, expected);
+        }
+
+        /// <summary>
+        /// this illustrates the mocking using MOQ
+        /// </summary>
+        [Fact]
+        [Trait("Category", "Mocking")]
+        public void mocking_test_specialFunction()
+        {
+            var input = 10;
+            var prefix = Mock.Of<SpecialPrefix>(x=>x.ResultPrefix == "Mocking of Prefix");
+            var specialFunction = new Mock<ICalculatorSpecialFunctionsInterface>();
+            specialFunction.Setup(x => x.DividedBy2(input, prefix.ResultPrefix)).Returns($"Mocking result is 5");
+
+            var specialCal = new SpecialCalculator(specialFunction.Object);
+            var expected = "final result is: Mocking result is 5";
+            var result = specialCal.GetFinalResult();
+            Assert.True(string.Compare(expected, result, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Principal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Xunit;
@@ -106,6 +107,23 @@ namespace xunit.calculatorTests
             var result = specialCal.GetFinalResult();
             Assert.True(string.Compare(expected, result, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
+
+        ////this is the mocking for ASP.NET MVC Controller. 
+        //private void MockHTTPContext()
+        //{
+        //    var fakeHttpContext = new Mock<HttpContextBase>();
+        //    var fakeIdentity = new GenericIdentity("test@gmail.com");
+        //    var principal = new GenericPrincipal(fakeIdentity, null);
+
+        //    fakeHttpContext.Setup(t => t.User).Returns(principal);
+
+        //    var controllerContext = new Mock<ControllerContext>();
+        //    controllerContext.Setup(t => t.HttpContext).Returns(fakeHttpContext.Object);
+
+        //    this.ControllerContext = controllerContext.Object;
+        //    var combforms = new CombatFormsController();
+        //    combforms.ControllerContext = controllerContext.Object;
+        //}
 
     }
 }
